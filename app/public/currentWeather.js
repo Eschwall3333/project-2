@@ -3,7 +3,7 @@ $(document).ready(function () {
   $("#search-button").click(function () {
 
     event.preventDefault();
-
+    var appId = require("./connection.js");
     var userState = $("").val();
     var userCity = $("").val();
 
