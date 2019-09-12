@@ -18,7 +18,7 @@
             console.log("LONGITUDE", response);
             if (response.searchResults) {
               for (var i = 0; i < response.searchResults.length; i++) {
-                //For Loop grabs the Name and Address and appends to each row//
+                //For Loop grabs the shelter data and appends to each row//
                 let NAME = response.searchResults[i].attributes.NAME;
                 let ADDRESS = response.searchResults[i].attributes.ADDRESS;
                 let ADDRESS2 = response.searchResults[i].attributes.ADDRESS2;
