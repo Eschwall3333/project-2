@@ -1,14 +1,13 @@
 // //HILFD API FULL CALL BEGINS//
         
 	$.ajax({
-          url: "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=ZIP%20like%20'%2530008%25'&outFields=NAME,ADDRESS,ADDRESS2,CITY,STATE,ZIP,TYPE,STATUS,POPULATION,COUNTY,COUNTRY,LATITUDE,LONGITUDE,WEBSITE&outSR=4326&f=json",
+          url: "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=ZIP%20like%20'%2530008%25'&outFields=NAME,ADDRESS,CITY,STATE,ZIP,TYPE,STATUS,POPULATION,COUNTY,COUNTRY,LATITUDE,LONGITUDE,WEBSITE&outSR=4326&f=json",
           method: "GET"
         })
 
           .then(function (response) {
             console.log("NAME", response);
             console.log("ADDRESS", response);
-            console.log("ADDRESS2", response);
             console.log("CITY", response);
             console.log("STATE", response);
             console.log("ZIP", response);
@@ -31,7 +30,6 @@
                 let LONGITUDE = response.searchResults[i].attributes.LONGITUDE;
                     $('#row' + (i + 1) + '>.name')[0].append(NAME);
                     $('#row' + (i + 1) + '>.address')[0].append(ADDRESS);
-                    $('#row' + (i + 1) + '>.address2')[0].append(ADDRESS2);
                     $('#row' + (i + 1) + '>.city')[0].append(CITY);
                     $('#row' + (i + 1) + '>.state')[0].append(STATE);
                     $('#row' + (i + 1) + '>.zip')[0].append(ZIP);
