@@ -1,3 +1,5 @@
+const OWM =  require('openweathermap-api');
+
 $(document).ready(function () {
   //ON-CLICK EVENT FOR SEARCH BUTTON//
   $("#search-button").click(function () {
@@ -802,7 +804,7 @@ $(document).ready(function () {
         }
     
     });
-
+});
 
 
 
