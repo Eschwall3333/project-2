@@ -1,5 +1,5 @@
 $(document).ready(function (){
-  let appId = require("./connection.js");
+  let appId = require(".SOS_project/config/connection.js");
   let units = "imperial";
   let searchMethod;
 
