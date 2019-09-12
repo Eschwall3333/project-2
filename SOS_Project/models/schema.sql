@@ -1,3 +1,4 @@
+
 CREATE DATABASE usa_shelters_db;
 USE usa_shelters_db;
 
@@ -18,3 +19,6 @@ INSERT INTO locations (shelter_name, address, city, state, zip, class, situation
 INSERT INTO	locations (shelter_name, address, city, state, zip, class, situation) VALUES ('FCSS ROSWELL HIGH SCHOOL', '11595 KING ROAD', 'ROSWELL', 'GA', '30175', 'POST', 'OPEN');
 INSERT INTO locations (shelter_name, address, city, state, zip, class, situation) VALUES ('SAINT FRANCIS OF ASSISI CATHOLIC CHURCH', '850 DOUTHIT FERRY RD', 'CARTERSVILLE', 'GA', '30120', 'EVAC', 'OPEN');
 INSERT INTO locations (shelter_name, address, city, state, zip, class, situation) VALUES ('WOODLAND HIGH SCHOOL', '800 OLD ALABAMA RD', 'CARTERSVILLE', 'GA', '30121', 'EVAC', 'OPEN');
+
+
+
