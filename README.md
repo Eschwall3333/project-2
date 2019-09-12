@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-# SOS - Safe Open Shelters
+# S O S -- (S) a f e  (O) p e n  (S) h e l t e r s  
 
 ### GA Tech Coding Boot Camp - Project 2
 
-SOS (Safe Open Shelters) is a web app that searches for safe, open shelters when an area has been devastated by a natural disaster...or zombies...  
+Safe Open Shelters (S.0.S) is an emergency preparedness app that meets the immediate needs of individuals, families, and communities devastated by a natural disaster... or zombies...  Whether you are looking to find a safe and open shelter or are preparing for a natural disasater, S.O.S will be there for you !! 
+
 
 ## Getting Started
 
@@ -33,13 +33,4 @@ Thank you to:
 * Sarah B.
 * Kathy S. 
 * Rebecca C.  
-=======
-# project-2
-
-S a f e (S) O p e n (O) S h e l t e r s (S)
-
-Safe Open Shelters (S.0.S) is an emergency preparedness app that works to meet the immediate disaster-caused needs of individuals, families, and communities. Whether you are looking to find a safe and open shelter or are preparing for a natural disasater, SOS will be there for you. 
-
-
-
->>>>>>> master
+ 
