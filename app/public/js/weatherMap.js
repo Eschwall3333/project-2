@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#search-button").click(function () {
 
     event.preventDefault();
-    var appId = require("./connection.js");
+    var appId = require("./connection.js.js");
     var userState = $("").val();
     var userCity = $("").val();
 
@@ -16,7 +16,7 @@ $(document).ready(function () {
         })
 
          
-      var appId = require("./connection.js");
+      var appId = require("./connection.js.js");
  
      
       L.OWM = L.TileLayer.extend({
