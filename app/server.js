@@ -23,7 +23,7 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/openWeatherRoutes")(app);
-require("./routes/")(app);
+require("./routes")(app);
 
 var syncOptions = { force: false };
 
