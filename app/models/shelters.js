@@ -15,7 +15,7 @@ var db = sequelize.define("book", {
 });
 
 // Syncs with DB
-Book.sync();
+db.sync();
 
 // Makes the Book Model available for other files (will also create a table)
-module.exports = Book;
+module.exports = db;
