@@ -1,12 +1,12 @@
 ////HILFD API FULL CALL BEGINS//
 
-var axios = require("axios");
-        
-var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=CITY%20like%20'%25WOODSTOCK%25'%20AND%20STATE%20like%20'%25GEORGIA%25'%20AND%20ZIP%20like%20'%2530188%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
+      
+var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=ZIP%20like%20'%25"
+var baseURL2 = "%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
 
-const getShelters = async () => {
+const getShelters = async (ZIP) => {
     try {
-        const res = await axios.get(`${baseURL}/shelter`);
+        const res = await $.get(baseURL + ZIP + baseURL2);
         const shelter = res.data;
         console.log(`GET: HERE IS A LIST OF SHELTERS`, shelter);
         return shelter;
@@ -31,7 +31,7 @@ const getShelters = async () => {
 //     } 
 // }
 
-   getShelters.then(function (response) {
+   getShelters(30188).then(function (response) {
      console.log("NAME", response);
      console.log("ADDRESS", response);
      console.log("CITY", response);
