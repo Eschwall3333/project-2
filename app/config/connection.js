@@ -1,28 +1,14 @@
-// *********************************************************************************
-// CONNECTION.JS - THIS FILE INITIATES THE CONNECTION TO MYSQL
-// *********************************************************************************
-
-// Require mysql
+//NPM Packages Used//
 var mysql = require("mysql");
+var Sequelize = require("Sequelize");
 
-// Set up our connection information
-var connection = mysql.createConnection({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "Password123",
-  database: "usa_shelters_db"
-});
 
-// Connect to the database
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-});
+//MySQL DB Connection Info and Error Message Handling//
+var sequelize = new Sequelize("usa_shelters_db", "root", "Explorer98*!",{
+   host: "127.0.0.1",
+   port: 3306,
+   dialect: "mysql"
+})
+//Connecting to DB//
 
-// Export connection
-module.exports = connection;
-
+module.exports = sequelize;
