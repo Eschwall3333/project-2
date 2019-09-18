@@ -1,22 +1,85 @@
 $(document).ready(function () {
-    //ON-CLICK EVENT FOR SEARCH BUTTON//
-    $("#shelterButton").click(function () {
-  
-      event.preventDefault();
-  
-      //var userInput2 = $("#shelterquery").val();
-    });
-    });
+  //ON-CLICK EVENT FOR SEARCH BUTTON//
+  $("#shelterButton").click(function () {
 
-////HILFD API FULL CALL BEGINS//
+    event.preventDefault();
+    var CITY2 = $("#shelterquery").val();
+    
+      getShelters(CITY2).then(function (response) {
+       var jsonResponse = JSON.parse(response);
+      // console.log("ADDRESS", response);
+      // console.log("CITY", response);
+      // console.log("STATE", response);
+      // console.log("CITY", response);
+      // console.log("TYPE", response);
+      // console.log("STATUS", response);
+      // console.log("WEBSITE", response);
+      // console.log("PET_CODE", response);
+      // console.log("TELEPHONE", response);
+      console.log(JSON.parse(response).features);
+        if (jsonResponse.features) {
+          for (var i = 0; i < jsonResponse.features.length; i++) {
+          //For Loop grabs the shelter data and appends to each row//
+             let NAME = jsonResponse.features[i].attributes.NAME;
+             let ADDRESS = jsonResponse.features[i].attributes.ADDRESS;
+             let CITY = jsonResponse.features[i].attributes.CITY;
+             let STATE = jsonResponse.features[i].attributes.STATE;
+             let TYPE = jsonResponse.features[i].attributes.TYPE;
+             let STATUS = jsonResponse.features[i].attributes.STATUS;
+             let WEBSITE = jsonResponse.features[i].attributes.WEBSITE;
+             let PET_CODE = jsonResponse.features[i].attributes.PET_CODE;
+             let TELEPHONE = jsonResponse.features[i].attributes.TELEPHONE;
+             console.log("NAME", NAME);
+             console.log("ADDRESS", ADDRESS);
+              console.log("CITY", CITY );
+              console.log("STATE", STATE);
+              console.log("TYPE", TYPE);
+              console.log("STATUS", STATUS);
+              console.log("WEBSITE", WEBSITE);
+              console.log("PET_CODE", PET_CODE);
+              console.log("TELEPHONE", TELEPHONE);
+                //  $('#row' + (i + 1) + '>.name')[0].append(NAME);
+                //  $('#row' + (i + 1) + '>.address')[0].append(ADDRESS);
+                //  $('#row' + (i + 1) + '>.city')[0].append(CITY);
+                //  $('#row' + (i + 1) + '>.state')[0].append(STATE);
+                //  $('#row' + (i + 1) + '>.CITY')[0].append(CITY);
+                //  $('#row' + (i + 1) + '>.type')[0].append(TYPE);
+                //  $('#row' + (i + 1) + '>.status')[0].append(STATUS);
+                //  $('#row' + (i + 1) + '>.status')[0].append(WEBSITE);
+                //  $('#row' + (i + 1) + '>.status')[0].append(PET_CODE);
+                //  $('#row' + (i + 1) + '>.status')[0].append(TELEPHONE);
+             $('tbody').append(`
+             <tr>
+										<td>${NAME}</td>
+										<td>${ADDRESS}</td>
+										<td>${CITY}</td>
+										<td>${STATE}</td>
+										<td>${TYPE}</td>
+										<td>${STATUS}</td>
+                    <td>${WEBSITE}</td>
+                    <td>${PET_CODE}</td>
+                    <td>${TELEPHONE}</td>
+                    <td colspan="8"></td>
+									</tr>
+             `)
+               }
+              } else {
+                //console.log below that will show results based off of success within api results from HILFD if enabled//
+                console.log("message:", response.message)
+    }
+  });
 
-var CITY2 ="";
-var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=CITY%20like%20'%25"
-var baseURL2 = "WOODSTOCK%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
+    //var userInput2 = $("#shelterquery").val();
+  });
+});
+
+
+    var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=CITY%20like%20'%25"
+    var baseURL2 = "%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
 
 function getShelters (CITY2){
-    $.get(baseURL + CITY2 + baseURL2, function(response){
-        console.log(response)
+   return $.get(baseURL + CITY2 + baseURL2, function(response){
+        // console.log(response)
     })
 }
 
@@ -48,46 +111,5 @@ function getShelters (CITY2){
 //     } 
 // }
 
-   getShelters(CITY2).then(function (response) {
-     console.log("NAME", response);
-     console.log("ADDRESS", response);
-     console.log("CITY", response);
-     console.log("STATE", response);
-     console.log("CITY", response);
-     console.log("TYPE", response);
-     console.log("STATUS", response);
-     console.log("WEBSITE", response);
-     console.log("PET_CODE", response);
-     console.log("TELEPHONE", response);
-       if (response.searchResults) {
-         for (var i = 0; i < response.searchResults.length; i++) {
-         //For Loop grabs the shelter data and appends to each row//
-            let NAME = response.searchResults[i].attributes.NAME;
-            let ADDRESS = response.searchResults[i].attributes.ADDRESS;
-            let CITY = response.searchResults[i].attributes.CITY;
-            let STATE = response.searchResults[i].attributes.STATE;
-            let TYPE = response.searchResults[i].attributes.TYPE;
-            let STATUS = response.searchResults[i].attributes.STATUS;
-            let WEBSITE = response.searchResults[i].attributes.WEBSITE;
-            let PET_CODE = response.searchResults[i].attributes.PET_CODE;
-            let TELEPHONE = response.searchResults[i].attributes.TELEPHONE;
-                $('#row' + (i + 1) + '>.name')[0].append(NAME);
-                $('#row' + (i + 1) + '>.address')[0].append(ADDRESS);
-                $('#row' + (i + 1) + '>.city')[0].append(CITY);
-                $('#row' + (i + 1) + '>.state')[0].append(STATE);
-                $('#row' + (i + 1) + '>.CITY')[0].append(CITY);
-                $('#row' + (i + 1) + '>.type')[0].append(TYPE);
-                $('#row' + (i + 1) + '>.status')[0].append(STATUS);
-                $('#row' + (i + 1) + '>.status')[0].append(WEBSITE);
-                $('#row' + (i + 1) + '>.status')[0].append(PET_CODE);
-                $('#row' + (i + 1) + '>.status')[0].append(TELEPHONE);
-            
-              }
-             } else {
-               //console.log below that will show results based off of success within api results from HILFD if enabled//
-               console.log("message:", response.message)
-   }
- });
+   
 //         //HILFD API FULL CALL ENDS
-
-getShelters(CITY2);
