@@ -4,9 +4,19 @@ $(document).ready(function () {
 
     event.preventDefault();
     var CITY2 = $("#shelterquery").val();
+    // "https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?" "where=1%3D1&outFields=CITY,PET_ACCOMMODATIONS_CODE,MAILING_ADDRESS_1,MAILING_ZIP,SHELTER_NAME,STATE&outSR=4326&f=json"
+    var baseURL = "https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?where=UPPER(CITY)%20like%20'%25"
+    var baseURL2 = "%25'&outFields=CITY,PET_ACCOMMODATIONS_CODE,MAILING_ADDRESS_1,SHELTER_NAME,STATE,STATUS,FACILITY_TYPE&outSR=4326&f=json"; 
+
+
+    function getShelters (CITY2){
+      return $.get(baseURL + CITY2 + baseURL2, function(response){
+            //console.log(response);
+       })
+   }
     
       getShelters(CITY2).then(function (response) {
-       var jsonResponse = JSON.parse(response);
+       //var jsonResponse = JSON.parse(response);
       // console.log("ADDRESS", response);
       // console.log("CITY", response);
       // console.log("STATE", response);
@@ -16,28 +26,30 @@ $(document).ready(function () {
       // console.log("WEBSITE", response);
       // console.log("PET_CODE", response);
       // console.log("TELEPHONE", response);
-      console.log(JSON.parse(response).features);
-        if (jsonResponse.features) {
-          for (var i = 0; i < jsonResponse.features.length; i++) {
+      //console.log(JSON.parse(response).features);
+      console.log("i made it this far");
+      console.log(response);
+        if (response.features) {
+          for (var i = 0; i < response.features.length; i++) {
           //For Loop grabs the shelter data and appends to each row//
-             let NAME = jsonResponse.features[i].attributes.NAME;
-             let ADDRESS = jsonResponse.features[i].attributes.ADDRESS;
-             let CITY = jsonResponse.features[i].attributes.CITY;
-             let STATE = jsonResponse.features[i].attributes.STATE;
-             let TYPE = jsonResponse.features[i].attributes.TYPE;
-             let STATUS = jsonResponse.features[i].attributes.STATUS;
-             let WEBSITE = jsonResponse.features[i].attributes.WEBSITE;
-             let PET_CODE = jsonResponse.features[i].attributes.PET_CODE;
-             let TELEPHONE = jsonResponse.features[i].attributes.TELEPHONE;
+             let NAME = response.features[i].attributes.SHELTER_NAME;
+             let ADDRESS = response.features[i].attributes.MAILING_ADDRESS_1;
+             let CITY = response.features[i].attributes.CITY;
+             let STATE = response.features[i].attributes.STATE;
+             let TYPE = response.features[i].attributes.FACILITY_TYPE;
+             let STATUS = response.features[i].attributes.STATUS;
+             
+             let PET_CODE = response.features[i].attributes.PET_ACCOMMODATIONS_CODE;
+            
              console.log("NAME", NAME);
              console.log("ADDRESS", ADDRESS);
               console.log("CITY", CITY );
               console.log("STATE", STATE);
               console.log("TYPE", TYPE);
               console.log("STATUS", STATUS);
-              console.log("WEBSITE", WEBSITE);
+              //console.log("WEBSITE", WEBSITE);
               console.log("PET_CODE", PET_CODE);
-              console.log("TELEPHONE", TELEPHONE);
+              
                 //  $('#row' + (i + 1) + '>.name')[0].append(NAME);
                 //  $('#row' + (i + 1) + '>.address')[0].append(ADDRESS);
                 //  $('#row' + (i + 1) + '>.city')[0].append(CITY);
@@ -56,9 +68,7 @@ $(document).ready(function () {
 										<td>${STATE}</td>
 										<td>${TYPE}</td>
 										<td>${STATUS}</td>
-                    <td>${WEBSITE}</td>
                     <td>${PET_CODE}</td>
-                    <td>${TELEPHONE}</td>
                     <td colspan="8"></td>
 									</tr>
              `)
@@ -74,14 +84,14 @@ $(document).ready(function () {
 });
 
 
-    var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=CITY%20like%20'%25"
-    var baseURL2 = "%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
+    // var baseURL = "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/National_Shelter_System_Facilities/FeatureServer/0/query?where=CITY%20like%20'%25"
+    // var baseURL2 = "%25'&outFields=CITY,STATE,TELEPHONE,TYPE,STATUS,ADDRESS,NAME,ZIP,WEBSITE,PET_CODE&outSR=4326&f=json"; 
 
-function getShelters (CITY2){
-   return $.get(baseURL + CITY2 + baseURL2, function(response){
-        // console.log(response)
-    })
-}
+// function getShelters (CITY2){
+//    return $.get(baseURL + CITY2 + baseURL2, function(response){
+//         // console.log(response)
+//     })
+// }
 
 
 // const getShelters = async (CITY) => {
