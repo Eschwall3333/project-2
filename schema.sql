@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> e334917f8f004df2885889ccf5fde170b60e5c62
 CREATE DATABASE usa_shelters_db;
 USE usa_shelters_db;
 
