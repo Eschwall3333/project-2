@@ -3,19 +3,20 @@ $(document).ready(function () {
   $("#shelterButton").click(function () {
 
     event.preventDefault();
-    var CITY2 = $("#shelterquery").val();
+    var ZIP2 = $("#shelterquery").val();
     // "https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?" "where=1%3D1&outFields=CITY,PET_ACCOMMODATIONS_CODE,MAILING_ADDRESS_1,MAILING_ZIP,SHELTER_NAME,STATE&outSR=4326&f=json"
-    var baseURL = "https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?where=UPPER(CITY)%20like%20'%25"
-    var baseURL2 = "%25'&outFields=CITY,PET_ACCOMMODATIONS_CODE,MAILING_ADDRESS_1,SHELTER_NAME,STATE,STATUS,FACILITY_TYPE&outSR=4326&f=json"; 
+    //"https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?where=UPPER(ZIP)%20like%20%27%2530188%25%""27&outFields=SHELTER_CODE,INCIDENT_CODE,STATE,SHELTER_NAME,CITY,ADDRESS_1,ZIP,STATUS,SHELTER_OPEN_DATE,SHELTER_CLOSED_DATE,PET_ACCOMMODATIONS_CODE,ORG_MAIN_PHONE&outSR=4326&f=json"
+    var baseURL = "https://gis.fema.gov/arcgis/rest/services/NSS/FEMA_NSS/FeatureServer/5/query?where=UPPER(ZIP)%20like%20%27%25" 
+    var baseURL2 = "%25%27&outFields=SHELTER_CODE,INCIDENT_CODE,STATE,SHELTER_NAME,CITY,ADDRESS_1,ZIP,STATUS,SHELTER_OPEN_DATE,SHELTER_CLOSED_DATE,PET_ACCOMMODATIONS_CODE,ORG_MAIN_PHONE&outSR=4326&f=json"; 
 
 
-    function getShelters (CITY2){
-      return $.get(baseURL + CITY2 + baseURL2, function(response){
+    function getShelters (ZIP2){
+      return $.get(baseURL + ZIP2 + baseURL2, function(response){
             //console.log(response);
        })
    }
     
-      getShelters(CITY2).then(function (response) {
+      getShelters(ZIP2).then(function (response) {
        //var jsonResponse = JSON.parse(response);
       // console.log("ADDRESS", response);
       // console.log("CITY", response);
@@ -33,22 +34,24 @@ $(document).ready(function () {
           for (var i = 0; i < response.features.length; i++) {
           //For Loop grabs the shelter data and appends to each row//
              let NAME = response.features[i].attributes.SHELTER_NAME;
-             let ADDRESS = response.features[i].attributes.MAILING_ADDRESS_1;
+             let ZIP = response.features[i].attributes.ZIP;
+             let ADDRESS_1 = response.features[i].attributes.ADDRESS_1;
              let CITY = response.features[i].attributes.CITY;
              let STATE = response.features[i].attributes.STATE;
-             let TYPE = response.features[i].attributes.FACILITY_TYPE;
-             let STATUS = response.features[i].attributes.STATUS;
+             let INCIDENT_CODE = response.features[i].attributes.INCIDENT_CODE;
+             let SHELTER_CODE = response.features[i].attributes.SHELTER_CODE;
              
-             let PET_CODE = response.features[i].attributes.PET_ACCOMMODATIONS_CODE;
+             //let PET_CODE = response.features[i].attributes.PET_ACCOMMODATIONS_CODE;
             
              console.log("NAME", NAME);
-             console.log("ADDRESS", ADDRESS);
+             console.log("ZIP", ZIP);
+             console.log("ADDRESS", ADDRESS_1);
               console.log("CITY", CITY );
               console.log("STATE", STATE);
-              console.log("TYPE", TYPE);
-              console.log("STATUS", STATUS);
+              console.log("INCIDENT TYPE", INCIDENT_CODE);
+              console.log("SHELTER CODE", SHELTER_CODE);
               //console.log("WEBSITE", WEBSITE);
-              console.log("PET_CODE", PET_CODE);
+              //console.log("PET_CODE", PET_CODE);
               
                 //  $('#row' + (i + 1) + '>.name')[0].append(NAME);
                 //  $('#row' + (i + 1) + '>.address')[0].append(ADDRESS);
@@ -62,13 +65,13 @@ $(document).ready(function () {
                 //  $('#row' + (i + 1) + '>.status')[0].append(TELEPHONE);
              $('tbody').append(`
              <tr>
-										<td>${NAME}</td>
-										<td>${ADDRESS}</td>
+                    <td>${NAME}</td>
+                    <td>${ZIP}</td>
+										<td>${ADDRESS_1}</td>
 										<td>${CITY}</td>
 										<td>${STATE}</td>
-										<td>${TYPE}</td>
-										<td>${STATUS}</td>
-                    <td>${PET_CODE}</td>
+										<td>${INCIDENT_CODE}</td>
+										<td>${SHELTER_CODE}</td>
                     <td colspan="8"></td>
 									</tr>
              `)
